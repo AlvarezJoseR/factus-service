@@ -1,0 +1,71 @@
+{
+	"info": {
+		"_postman_id": "factus-api-endpoints",
+		"name": "FACTUS API",
+		"description": "API endpoints para FACTUS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"usuario@example.com\",\n  \"password\": \"1234567890\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/auth/login",
+					"host": ["{{baseUrl}}"],
+					"path": ["api", "auth", "login"]
+				}
+			}
+		},
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"business_name\": \"Empresa Example S.A. de C.V.\",\n  \"email\": \"usuario@example.com\",\n  \"password\": \"1234567890\",\n  \"phone\": \"+52 55 1234 5678\",\n  \"address\": \"Calle Example #123, Col. Centro, CDMX\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/users/register",
+					"host": ["{{baseUrl}}"],
+					"path": ["api", "users", "register"]
+				}
+			}
+		}
+	],
+	"event": [
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"if ((pm.response.code === 200 || pm.response.code === 201) && pm.response.json().token) {",
+					"    pm.environment.set('authToken', pm.response.json().token);",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000"
+		}
+	]
+}
